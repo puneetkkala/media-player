@@ -19,6 +19,7 @@
         android:layout_height="1dp" />
     <android.support.v7.widget.RecyclerView
         android:fadeScrollbars="false"
+        android:scrollbars="vertical"
         android:id="@+id/media_files_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
