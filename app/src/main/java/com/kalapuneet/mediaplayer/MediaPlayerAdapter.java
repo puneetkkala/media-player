@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -51,9 +52,9 @@ public class MediaPlayerAdapter extends RecyclerView.Adapter<MediaPlayerAdapter.
             String key = mediaFiles.get(position);
             holder.mediaItemTitle.setText(key);
             if(currentTrack != null && currentTrack.equalsIgnoreCase(key)) {
-                holder.mediaItemPlayPause.setText("STOP");
+                holder.mediaItemPlayPause.setImageResource(R.drawable.ic_stop_black_24dp);
             } else {
-                holder.mediaItemPlayPause.setText("PLAY");
+                holder.mediaItemPlayPause.setImageResource(R.drawable.ic_play_arrow_black_24dp);
             }
         }
     }
@@ -66,13 +67,13 @@ public class MediaPlayerAdapter extends RecyclerView.Adapter<MediaPlayerAdapter.
     public class MediaItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mediaItemTitle;
-        private TextView mediaItemPlayPause;
+        private ImageView mediaItemPlayPause;
         private LinearLayout mediaItemLayout;
 
         public MediaItemViewHolder(View itemView) {
             super(itemView);
             mediaItemTitle = (TextView) itemView.findViewById(R.id.media_item_title);
-            mediaItemPlayPause = (TextView) itemView.findViewById(R.id.media_item_play_pause);
+            mediaItemPlayPause = (ImageView) itemView.findViewById(R.id.media_item_play_pause);
             mediaItemPlayPause.setOnClickListener(this);
             mediaItemLayout = (LinearLayout) itemView.findViewById(R.id.media_item_layout);
             mediaItemLayout.setOnClickListener(this);
@@ -80,7 +81,7 @@ public class MediaPlayerAdapter extends RecyclerView.Adapter<MediaPlayerAdapter.
 
         @Override
         public void onClick(View view) {
-            int position = getPosition();
+            int position = getAdapterPosition();
             if(position > -1 && position < mediaFiles.size()) {
                 String key = mediaFiles.get(position);
                 MediaFile mediaFile = mediaFilesTreeMap.get(key);
